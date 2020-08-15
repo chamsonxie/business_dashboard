@@ -3,11 +3,11 @@ import style from './App.module.scss'
 
 import Container from './components/Container/Container'
 import Header from './components/Header/Header'
-
+import Footer from './components/Footer'
 
 function App() {
   return (
-    <div className="App">
+    <div className={style.App}>
       <div className={style.app_header}>
         <Header></Header>
       </div>
@@ -15,7 +15,7 @@ function App() {
         <Container></Container>
       </div>
       <div className={style.app_footer}>
-        
+        <Footer></Footer>
       </div>
     </div>
   );

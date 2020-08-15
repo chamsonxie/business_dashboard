@@ -1,119 +1,74 @@
 import React, { Component } from 'react'
 import style from './Container.module.scss'
-import ReactEcharts from 'echarts-for-react';
-import echarts from 'echarts';
-import axois from 'axios'
-import { color } from 'echarts/lib/export';
 
+import BarChart from './BarChart/BarChart'
+import Table from './Table/Table'
+import Map from './Map/Map'
+import Stock from './Stock/Stock'
+import Bing from './Bing/Bing'
 
+import full_icon from './full.png'
+import exitfull_icon from './exit.png'
 
 export default class Container extends Component {
-    state={
-        csrc:{},
-    }
-    componentWillMount(){
-        this.getCSRC()
-    }
+    componentDidMount(){
+        var isfull = false
+        document.querySelector('#fullscreen').addEventListener('click',()=>{
+            if(isfull){
+                this.exitfull()
+                isfull = !isfull
+                document.querySelector('#fullscreen img').src = full_icon
 
-    async getCSRC(){
-        var ydata=[]
-        var sdata=[]
-        let data = await axois.get('/data/ranking-list.json')
-        data.data.map((v,i)=>{
-            ydata.push(v.stock_name)
-            sdata.push(v.market_capitalization)
-        })
-        console.log(ydata,sdata)
-        this.setState({ 
-            csrc: {
-                legend:{
-                },
-                grid:{
-                    top:'50',
-                    left:'60',
-                    bottom:'0',
-                    right:'40',
-                    height:'auto',
-                    width:'auto'
-                },
-                title:{
-                    text:"市价总值排行Top10",
-                    textStyle:{
-                        color:"#fff"
-                    }
-                },
-                yAxis: {
-                    type: 'category',
-                    data:ydata,
-                    axisLine:{
-                        show:false
-                    },
-                    axisLabel:{
-                        color:'#fff'
-                    }
-                },
-                xAxis: {
-                    type: 'value',
-                    show:false,
-                    axisLine:{
-                        show:false
-                    },
-                    label:{
-                        show:true,
-                        color:'#ffffff'
-                    },
-                },
-                series: [{
-                    data: sdata,
-                    type: 'bar',
-                    barWidth:10,
-                    label:{
-                        show:true,
-                        position:'right',
-                        color:'#fff'
-                    },
-                    itemStyle:{
-                        color: new echarts.graphic.LinearGradient(
-                            0, 0, 1, 0,
-                            [
-                                {offset: 0, color: '#83bff6'},
-                                {offset: 0.5, color: '#188df0'},
-                                {offset: 1, color: '#188df0'}
-                            ]
-                        ),
-                    }
-                }]
+            }else{
+                this.full()
+                isfull = !isfull
+                document.querySelector('#fullscreen img').src = exitfull_icon
             }
-            
         })
     }
-
-
+    full(element = document.documentElement) {
+        if (element.requestFullscreen) {
+            element.requestFullscreen()
+        } else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen()
+        } else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen()
+        } else if (element.msRequestFullscreen) {
+            element.msRequestFullscreen()
+        }
+    }
+    exitfull() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen()
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen()
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen()
+        }
+    }
     render() {
         return (
             <div className={style.container}>
-                <div className={style.row}>
-                    
+                <div id="fullscreen" className={style.fullscreen}>
+                    <img src={full_icon} alt="fullscreen"/>
+                </div>
+                <div className={style.row}>    
                     <div className={style.col1}>
-                        <ReactEcharts
-                            notMerge={true}
-                            lazyUpdate={true}
-                            option={this.state.csrc}
-                        />
+                        <BarChart></BarChart>
                     </div>
                     <div className={style.col1}>
-                        
+                        <Table></Table>
                     </div>
                     <div className={style.col1}>
-
+                        <Map></Map>
                     </div>
                 </div>
                 <div className={style.row}>
                     <div className={style.col2}>
-
+                        <Stock></Stock>
                     </div>
                     <div className={style.col1}>
-                        
+                        <Bing></Bing>
                     </div>
                 </div>
             </div>

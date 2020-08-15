@@ -5,11 +5,18 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #281e2f ;
-  color: white;
+  background-color: #08012a ;
+  /* color: white; */
+  min-width: 1200px;
+  min-height: 600px;
+  overflow: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+div,section,p,a,span,ul,ol,li,h1,h2,h3,h4,h5,h6{
+  margin: 0;padding: 0;box-sizing: border-box;
 }

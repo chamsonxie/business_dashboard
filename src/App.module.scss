@@ -1,11 +1,14 @@
-.app_header{
-  height: 48px;
-  background-image: url(/header.png);
-  background-size: 100% 100%; 
-}
-.app_body{
-  height: calc(100vh - 70px);
-}
-.app_footer{
-  height: 22px;
+.App{
+  .app_header{
+    height: 44px;
+    background-image: url(/header.png);
+    background-size: 100% 100%; 
+  }
+  .app_body{
+    height: calc(100vh - 60px);
+    min-height: 540px;
+  }
+  .app_footer{
+    height: 16px;
+  }
 }
