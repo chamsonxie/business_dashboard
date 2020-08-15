@@ -16,11 +16,9 @@ class BarChart extends Component {
     render() {
         return (
             <React.Fragment>
-
                 <ReactEcharts
                     ref={e=>{this.echarts=e}}
                     notMerge={true}
-                    lazyUpdate={true}
                     option={this.props.barOption  || {}}
                     style={{height:'100%',width:'100%'}}
                 />
