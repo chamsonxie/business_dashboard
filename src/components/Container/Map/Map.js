@@ -19,6 +19,7 @@ class Map extends Component {
         })
     }
     updateMap=()=>{
+        //更新echart
         this.echarts.getEchartsInstance().setOption(this.props.mapOption,true)
     }
     render() {

@@ -7,6 +7,7 @@ import {setBar} from '../../../store/actionsCreators'
 class BarChart extends Component {
     componentDidMount(){
         this.props.setBar().then(res=>{
+            //更新echart
             this.echarts.getEchartsInstance().setOption(this.props.barOption,true)
         })
         window.addEventListener('resize',()=>{
@@ -26,6 +27,7 @@ class BarChart extends Component {
         )
     }
 }
+
 const mapStateToProps= (state) => {
     return {
         barOption:state.barOption

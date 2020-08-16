@@ -10,22 +10,15 @@ import Bing from './Bing/Bing'
 import full_icon from './full.png'
 import exitfull_icon from './exit.png'
 
-export default class Container extends Component {
-    componentDidMount(){
-        var isfull = false
-        document.querySelector('#fullscreen').addEventListener('click',()=>{
-            if(isfull){
-                this.exitfull()
-                isfull = !isfull
-                document.querySelector('#fullscreen img').src = full_icon
+import { connect } from 'react-redux'
+import {toggleFullscreen} from '../../store/actionsCreators'
 
-            }else{
-                this.full()
-                isfull = !isfull
-                document.querySelector('#fullscreen img').src = exitfull_icon
-            }
-        })
+
+class Container extends Component {
+    state={
+        fullicon:this.props.isfullfs?exitfull_icon: full_icon
     }
+    //进入全屏
     full(element = document.documentElement) {
         if (element.requestFullscreen) {
             element.requestFullscreen()
@@ -36,7 +29,9 @@ export default class Container extends Component {
         } else if (element.msRequestFullscreen) {
             element.msRequestFullscreen()
         }
+
     }
+    //退出全屏
     exitfull() {
         if (document.exitFullscreen) {
             document.exitFullscreen()
@@ -46,11 +41,23 @@ export default class Container extends Component {
             document.webkitExitFullscreen()
         }
     }
+    //切换全屏
+    togglefull(){
+        if(this.props.isfullfs){
+            this.exitfull()
+        }else{
+            this.full()
+        }
+        this.props.toggleFullscreen()
+        this.setState({
+            fullicon:this.props.isfullfs?full_icon:exitfull_icon
+        })
+    }
     render() {
         return (
             <div className={style.container}>
-                <div id="fullscreen" className={style.fullscreen}>
-                    <img src={full_icon} alt="fullscreen"/>
+                <div id="fullscreen" onClick={this.togglefull.bind(this)} className={style.fullscreen}>
+                    <img src={this.state.fullicon} alt="fullscreen"/>
                 </div>
                 <div className={style.row}>    
                     <div className={style.col1}>
@@ -75,3 +82,10 @@ export default class Container extends Component {
         )
     }
 }
+const mapStateToProps = (state) => {
+    return  { isfullfs : state.isFullScreen}
+}
+const mapDispatchToProps = dispatch => ({
+    toggleFullscreen:function(){dispatch(toggleFullscreen())}
+})
+export default connect(mapStateToProps,mapDispatchToProps)(Container)

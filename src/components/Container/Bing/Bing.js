@@ -7,6 +7,7 @@ import { setCSRC} from '../../../store/actionsCreators'
 class Bing extends Component {
     componentDidMount(){
         this.props.setCsrc().then(res=>{
+            //更新echart
             this.echarts.getEchartsInstance().setOption(this.props.csrcOption,true)
         })
     }

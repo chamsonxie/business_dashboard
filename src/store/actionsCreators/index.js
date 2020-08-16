@@ -1,5 +1,14 @@
-// import SET_MAP_DATA from '../actionsTypes'
-const SET_MAP_DATA = "SET_MAP_DATA"
+import  {
+    SET_BAR,
+    SET_CSRC,
+    SET_MAP_DATA,
+    SET_STOCK,
+    TOGGLE_FS
+} from '../actionTypes'
+
+export const toggleFullscreen=()=>({
+    type:TOGGLE_FS
+})
 export const setMapData=(mapdata)=>({
     type:SET_MAP_DATA,
     payload:{
@@ -7,21 +16,21 @@ export const setMapData=(mapdata)=>({
     }
 })
 export const setStockData= (stockdata) => ({
-    type:'SET_STOCK',
+    type:SET_STOCK,
     payload:{
         stockdata
     }
 })
 
 export const setCSRC = (csrcdata) => ({
-    type:'SET_CSRC',
+    type:SET_CSRC,
     payload:{
         csrcdata
     }
 })
 export const setBar = (bardata) => {
     return {
-        type:'SET_BAR',
+        type:SET_BAR,
         payload:{
             bardata
         }

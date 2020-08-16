@@ -14,6 +14,7 @@ class Stock extends Component {
             this.updateChart()
         })
         window.addEventListener('resize',()=>{
+            //更新echart
             this.echarts.getEchartsInstance().resize()
         })
     }

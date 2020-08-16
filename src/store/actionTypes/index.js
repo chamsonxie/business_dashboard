@@ -1,0 +1,5 @@
+export const SET_MAP_DATA = 'SET_MAP_DATA'
+export const SET_BAR = 'SET_BAR'
+export const SET_STOCK = 'SET_STOCK'
+export const SET_CSRC = 'SET_CSRC'
+export const TOGGLE_FS = 'TOGGLE_FS'

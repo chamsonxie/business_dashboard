@@ -4,11 +4,16 @@ import icon3 from '../images/icon-03.png'
 import icon4 from '../images/icon-04.png'
 import icon5 from '../images/icon-05.png'
 import icon6 from '../images/icon-06.png'
-// import SET_MAP_DATA from '../actionsTypes'
-const SET_MAP_DATA = "SET_MAP_DATA"
+import  {
+    SET_BAR,
+    SET_CSRC,
+    SET_MAP_DATA,
+    SET_STOCK,
+    TOGGLE_FS
+} from '../actionTypes'
 
 const defaultState = {
-    num:888,
+    isFullScreen:false,
     barOption:{
         legend:{
         },
@@ -430,7 +435,10 @@ const defaultState = {
 export default function(state=defaultState,action){
     let newstate = Object.assign({},state)
     switch(action.type){
-        case 'SET_BAR':
+        case TOGGLE_FS:
+            newstate.isFullScreen = !newstate.isFullScreen
+            break
+        case SET_BAR:
             var ydata=[]
             var sdata=[]
             action.payload.bardata.forEach((v,i)=>{
@@ -452,7 +460,7 @@ export default function(state=defaultState,action){
             }
             newstate.mapOption.series.data = newdata
             break;
-        case 'SET_STOCK':
+        case SET_STOCK:
             var total_value =[]
             var average =[]
             var total_amount =[]
@@ -468,7 +476,7 @@ export default function(state=defaultState,action){
             newstate.stockOption.series[1].data = total_value
             newstate.stockOption.series[2].data = average
             break
-        case 'SET_CSRC':
+        case SET_CSRC:
             var csrc = []
             var names=[]
             action.payload.csrcdata.forEach((v,i)=>{
