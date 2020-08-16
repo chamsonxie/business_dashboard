@@ -11,7 +11,7 @@ const chinamap = require('./ChinaMap.json')
 class Map extends Component {
     componentDidMount(){
         echarts.registerMap('china', chinamap);
-        this.props.setMapData().then(res=>{
+        this.props.setMapData().then(()=>{
             this.updateMap()
         })
         window.addEventListener('resize',()=>{
